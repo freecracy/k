@@ -43,8 +43,13 @@ let head = [
 
 let navbar = [
   {
-    text: "入门",
-    link: "/入门/",
+    text: "指南",
+    children: [
+      {
+        text: "入门",
+        link: "/入门/",
+      },
+    ],
   },
   {
     text: "其它",
