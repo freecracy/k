@@ -43,8 +43,8 @@ let head = [
 
 let navbar = [
   {
-    text: "指南",
-    children: ["/入门/基础.md", "/入门/创建和发布应用.md", "/入门/问题集.md"],
+    text: "入门",
+    link: "/入门/",
   },
   {
     text: "其它",
@@ -57,12 +57,14 @@ let navbar = [
   },
 ];
 
-let sidebar = [
-  {
-    text: "入门",
-    children: ["/入门/基础.md", "/入门/创建和发布应用.md"],
-  },
-];
+let sidebar = {
+  "/入门/": [
+    {
+      text: "入门",
+      children: ["/入门/基础.md", "/入门/创建和发布应用.md", "/入门/问题集.md"],
+    },
+  ],
+};
 
 export default defineUserConfig<DefaultThemeOptions>({
   base: "/k/",
