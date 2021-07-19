@@ -47,7 +47,7 @@ let navbar = [
     children: [
       {
         text: "入门",
-        link: "/入门/",
+        link: "/入门/基础.md",
       },
     ],
   },
@@ -62,14 +62,12 @@ let navbar = [
   },
 ];
 
-let sidebar = {
-  "/入门/": [
-    {
-      text: "入门",
-      children: ["/入门/基础.md", "/入门/创建和发布应用.md", "/入门/问题集.md"],
-    },
-  ],
-};
+let sidebar = [
+  {
+    text: "入门",
+    children: ["/入门/基础.md", "/入门/创建和发布应用.md", "/入门/问题集.md"],
+  },
+];
 
 export default defineUserConfig<DefaultThemeOptions>({
   base: "/k/",
@@ -81,6 +79,7 @@ export default defineUserConfig<DefaultThemeOptions>({
     navbar,
     sidebar,
     lastUpdatedText: "最近更新",
+    contributors: false,
   },
   bundler: "@vuepress/vite",
 });
