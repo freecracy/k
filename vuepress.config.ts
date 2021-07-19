@@ -56,12 +56,7 @@ let sidebar = [
   {
     text: "入门",
     link: "/入门/",
-    children: [
-      {
-        text: "是什么",
-        link: "/入门/是什么.md",
-      },
-    ],
+    children: ["/入门/基础.md", "/入门/创建和发布应用.md"],
   },
 ];
 
