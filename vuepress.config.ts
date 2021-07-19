@@ -43,19 +43,23 @@ let head = [
 
 let navbar = [
   {
-    text: "入门",
-    link: "/入门/",
+    text: "指南",
+    children: ["/入门/基础.md", "/入门/创建和发布应用.md", "/入门/问题集.md"],
   },
   {
-    text: "指南",
-    children: ["/入门/基础.md", "/入门/创建和发布应用.md"],
+    text: "其它",
+    children: [
+      {
+        text: "clickHouse",
+        link: "https://clickhouse.tech/docs/zh/",
+      },
+    ],
   },
 ];
 
 let sidebar = [
   {
     text: "入门",
-    link: "/入门/",
     children: ["/入门/基础.md", "/入门/创建和发布应用.md"],
   },
 ];
@@ -69,6 +73,7 @@ export default defineUserConfig<DefaultThemeOptions>({
     logo: "https://vuejs.org/images/logo.png",
     navbar,
     sidebar,
+    lastUpdatedText: "最近更新",
   },
   bundler: "@vuepress/vite",
 });
