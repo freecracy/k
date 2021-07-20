@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 yarn add vuepress@next
 echo 'node_modules' >> .gitignore
