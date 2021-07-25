@@ -62,7 +62,10 @@ export default defineComponent({
         },
       }).then((response) => {
         if (response.data.code == 100000 && response.data.data.status == true) {
-          window.localStorage.setItem("session", md5(response.data.data.token));
+          window.localStorage.setItem(
+            "session",
+            md5(response.data.data.status)
+          );
           document.getElementById("k").remove();
           document.getElementById("app").style.display = "inline";
         } else {
