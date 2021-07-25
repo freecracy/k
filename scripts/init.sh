@@ -5,4 +5,4 @@ echo 'node_modules' >> .gitignore
 echo '.temp' >> .gitignore
 echo '.cache' >> .gitignore
 mkdir docs
-echo '# Hello VuePress' > docs/README.md
+echo '# Hello' > docs/README.md
