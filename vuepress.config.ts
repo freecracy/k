@@ -19,6 +19,14 @@ let navbar = [
 				text: "clickHouse",
 				link: "https://clickhouse.tech/docs/zh/",
 			},
+			{
+				text: "etcd",
+				link: "https://etcd.io",
+			},
+			{
+				text: "ts",
+				link: "https://www.typescriptlang.org",
+			},
 		],
 	},
 	{
