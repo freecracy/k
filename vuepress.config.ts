@@ -13,6 +13,10 @@ let navbar = [
 		],
 	},
 	{
+		text: "文章",
+		children: ["/其它/服务.md", "/其它/ELK环境搭建.md"],
+	},
+	{
 		text: "其它",
 		children: [
 			{
