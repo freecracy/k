@@ -14,7 +14,7 @@ let navbar = [
 	},
 	{
 		text: "文章",
-		children: ["/其它/服务.md", "/其它/ELK环境搭建.md"],
+		children: ["/其它/服务.md", "/其它/ELK环境搭建.md", "/其它/proto3.md"],
 	},
 	{
 		text: "其它",
@@ -30,6 +30,14 @@ let navbar = [
 			{
 				text: "ts",
 				link: "https://www.typescriptlang.org",
+			},
+			{
+				text: "grafana",
+				link: "https://grafana.com/oss/",
+			},
+			{
+				text: "runst",
+				link: "https://www.rust-lang.org/zh-CN/",
 			},
 		],
 	},
