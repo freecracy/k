@@ -14,7 +14,12 @@ let navbar = [
 	},
 	{
 		text: "文章",
-		children: ["/其它/服务.md", "/其它/ELK环境搭建.md", "/其它/proto3.md"],
+		children: [
+			"/其它/服务.md",
+			"/其它/ELK环境搭建.md",
+			"/其它/proto3.md",
+			"/其它/Makefile.md",
+		],
 	},
 	{
 		text: "其它",
@@ -73,7 +78,7 @@ export default defineUserConfig<DefaultThemeOptions>({
 	title: "k8s笔记",
 	description: "just a little",
 	themeConfig: {
-		logo: "https://vuejs.org/images/logo.png",
+		logo: "https://www.google.com.hk/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
 		navbar,
 		sidebar,
 		lastUpdatedText: "最近更新",
