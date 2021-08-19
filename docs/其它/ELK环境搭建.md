@@ -14,6 +14,22 @@ node.data: true
 ## 客户端节点 不会成为主节点，也不会存储数据，主要是针对海量请求的时候，可以进行负载均衡
 node.master: false
 node.data: false
+
+cluster.name: cluster-name
+node.name: es1
+node.master: true
+node.data: true
+path.data: /var/data
+path.logs: /var/log
+network.host: 0.0.0.0
+http.port: 9200
+cluster.initial_master_nodes: ["es1"] # 单节点部署
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
 ```
 
 ### 启动
@@ -35,7 +51,10 @@ curl http://127.0.0.1:89200
 可以下载 客户端 mac 或 windos 版直接连接服务器 es,也可以服务器部署.
 
 ```yaml
-
+elasticsearch.hosts: ["http://127.0.0.1:9200"]
+elasticsearch.username: "kibana_system"
+elasticsearch.password: "password"
+i18n.locale: "zh-CN"
 ```
 
 ### 启动
@@ -55,12 +74,43 @@ bin/kibana
 需要下载 jdbc connecter 相应版本.
 
 ```yaml
+input {
+jdbc {
+jdbc_driver_library => "/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49.jar"
+jdbc_driver_class => "com.mysql.jdbc.Driver"
+jdbc_connection_string => "jdbc:mysql://127.0.0.1:3306/db"
+jdbc_user => "username"
+jdbc_password => "password"
+schedule => "* * * * *"
+statement => "select * from test WHERE updated_at >= :sql_last_value"
+use_column_value => true
+tracking_column_type => "timestamp"
+tracking_column => "updated_at"
+last_run_metadata_path => "syncpoint_table"
+}
+}
 
+
+output {
+elasticsearch {
+hosts => ["127.0.0.1:9200"]
+user => elastic
+password => password
+index => "index"
+document_id => "%{id}"
+document_type => "type"
+}
+stdout {
+codec => json_lines
+}
+}
 ```
+
+> where hq_music.updated_at >= :sql_last_value
 
 ### 启动
 
-```
+```shell
 bin/logstash
 ```
 
@@ -77,8 +127,36 @@ kibana dev tool 中执行查询语句
 ### 配置
 
 ```yaml
+filebeat.inputs:
+  - type: log
+    paths:
+      - /var/*.log # 文件名没有后缀,可以用/*
+    json.keys_under_root: true
+    json.overwrite_keys: true
+    json.add_error_key: true
+    json.expand_keys: true
 
+output.elasticsearch:
+  hosts: ["http://127.0.0.1:9200"]
+  username: "elastic"
+  password: "password"
 ```
+
+```yaml
+setup.ilm.enabled: false
+setup.template.enabled: false
+setup.template.name: "app-log-"
+setup.template.pattern: "app-log-*"
+output.elasticsearch:
+  hosts: ["http://127.0.0.1:9200"]
+  username: "elastic"
+  password: "password"
+  index: "app-log-%{[agent.version]}-%{+yyyy.MM.dd}"
+  enable: true
+```
+
+> - 需要 cat >> 写入日志才能生效
+> - setup 要放前面
 
 ### 启动
 
@@ -168,4 +246,83 @@ merge 进程会在后台选择一些小体积的 segments,然后将其合并成�
 kubectl -s http://ip:port create -f es-master.yaml  # 配置 master 节点
 kubectl -s http://ip:port create -f es-data.yaml    # 配置 data 节点
 kubectl -s http://ip:port create -f es-service.yaml # 配置成可访问服务
+```
+
+## ES 集群
+
+### 节点配置
+
+#### master
+
+```yaml
+cluster.name: cluster-name
+node.name: node-1
+node.attr.rack: r1
+network.host: 0.0.0.0
+http.port: 9200
+discovery.seed_hosts: ["127.0.0.1:9301"]
+node.master: true
+node.data: false
+
+discovery.zen.minimum_master_nodes: 1
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+transport.tcp.port: 9302
+
+xpack.security.enabled: true
+xpack.license.self_generated.type: basic
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.keystore.path: certs/elastic-certificates.p12
+xpack.security.transport.ssl.truststore.path: certs/elastic-certificates.p12
+
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+```
+
+#### data
+
+```yaml
+cluster.name: cluster-name
+node.name: node-2
+node.attr.rack: r1
+network.host: 0.0.0.0
+http.port: 9201
+discovery.seed_hosts: ["127.0.0.1:9300"]
+cluster.initial_master_nodes: ["node-1"]
+
+node.master: false
+node.data: true
+
+discovery.zen.minimum_master_nodes: 1
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+transport.tcp.port: 9301
+
+xpack.security.enabled: true
+xpack.license.self_generated.type: basic
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.keystore.path: certs/elastic-certificates.p12
+xpack.security.transport.ssl.truststore.path: certs/elastic-certificates.p12
+
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+```
+
+### 设置证书
+
+```shell
+bin/elasticsearch-certutil ca # 不要输入密码
+bin/elasticsearch-certutil cert  --ca elastic-stack-ca.p12 # 不要输入密码
+mv elastic-certificates.p12 config/certs/ # master data 都复制该文件
+chmod 777 config/certs
+```
+
+### 设置密码
+
+```shell
+bin/elasticsearch-setup-passwords auto
 ```

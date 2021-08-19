@@ -41,8 +41,16 @@ let navbar = [
 				link: "https://grafana.com/oss/",
 			},
 			{
-				text: "runst",
+				text: "rust",
 				link: "https://www.rust-lang.org/zh-CN/",
+			},
+			{
+				text: "代码编辑平台",
+				link: "https://www.codepile.net",
+			},
+			{
+				text: "文件服务器",
+				link: "https://github.com/filebrowser/filebrowser",
 			},
 		],
 	},
