@@ -1,0 +1,1 @@
+import{o as a,c as e,a as r,b as d}from"./app.e373aad4.js";const n={},s={id:"集群管理",tabindex:"-1"},t=r("a",{class:"header-anchor",href:"#集群管理","aria-hidden":"true"},"#",-1),o=d(" 集群管理");n.render=function(r,d){return a(),e("h1",s,[t,o])};export default n;

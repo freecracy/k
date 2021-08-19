@@ -1,0 +1,1 @@
+const e={key:"v-507af994",path:"/%E5%85%A5%E9%97%A8/%E6%B7%B1%E5%85%A5%E6%8E%8C%E6%8F%A1service.html",title:"深入掌握 service",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],filePathRelative:"入门/深入掌握service.md",git:{updatedTime:1626796288e3}};export{e as data};

@@ -1,0 +1,1 @@
+import{o as e,c as a,a as r,b as s}from"./app.e373aad4.js";const i={},c={id:"深入掌握-service",tabindex:"-1"},d=r("a",{class:"header-anchor",href:"#深入掌握-service","aria-hidden":"true"},"#",-1),n=s(" 深入掌握 service");i.render=function(r,s){return e(),a("h1",c,[d,n])};export default i;

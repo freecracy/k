@@ -1,0 +1,1 @@
+const e={key:"v-5d6f151f",path:"/%E5%85%A5%E9%97%A8/%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6.html",title:"核心组件运行机制",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],filePathRelative:"入门/核心组件运行机制.md",git:{updatedTime:1626796288e3}};export{e as data};

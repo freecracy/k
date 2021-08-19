@@ -1,0 +1,1 @@
+import{o as a,c as e,a as r,b as d}from"./app.e373aad4.js";const n={},s={id:"存储",tabindex:"-1"},t=r("a",{class:"header-anchor",href:"#存储","aria-hidden":"true"},"#",-1),o=d(" 存储");n.render=function(r,d){return a(),e("h1",s,[t,o])};export default n;

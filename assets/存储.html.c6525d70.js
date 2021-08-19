@@ -1,0 +1,1 @@
+const e={key:"v-4d59cf08",path:"/%E5%85%A5%E9%97%A8/%E5%AD%98%E5%82%A8.html",title:"存储",lang:"zh-CN",frontmatter:{},excerpt:"",headers:[],filePathRelative:"入门/存储.md",git:{updatedTime:1626796288e3}};export{e as data};
